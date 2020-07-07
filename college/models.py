@@ -7,8 +7,8 @@ class Professor(models.Model):
 
 class Lecture(models.Model):
 	name = models.CharField(max_length=100)
-	lecturer = models.ForeignKey('college.Professor', related_name='lectures')
-	attendees = models.ManyToMany('college.Student', related_name='lectures')
+	lecturer = models.ForeignKey('college.Professor', related_name='lectures', on_delete=models.SET_NULL)
+	attendees = models.ManyToManyField('college.Student', related_name='lectures')
 
 
 class Student(models.Model):

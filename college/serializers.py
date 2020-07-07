@@ -4,7 +4,7 @@ from college.models import *
 
 def not_a_serializer(queryset, options):
     """
-    options keys 필수로 작성
+    options keys required
     :param queryset: QuerySet()
     :param options: {
         'concrete_fields': ['field', ...],
@@ -29,9 +29,9 @@ def not_a_serializer(queryset, options):
             name = v['dict_name'] if 'dict_name' in v else k
             tmpObj = getattr(obj, k)
             if 'related_descriptors' in type(tmpObj).__module__:
-                row[name] = serialize_with_options(tmpObj.all(), v)
+                row[name] = not_a_serializer(tmpObj.all(), v)
             else:
-                row[name] = serialize_with_options([tmpObj], v)
+                row[name] = not_a_serializer([tmpObj], v)
         results.append(row)
     return results
 
