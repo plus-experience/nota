@@ -1,1 +1,1 @@
-# nota
+# nota: not a serializer
